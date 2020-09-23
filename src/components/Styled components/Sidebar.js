@@ -16,6 +16,13 @@ const Sidebar = styled.div`
 	background: ${props => props.theme.colors.primary.dark};
 	&::-webkit-scrollbar {
 		width: 4px;
+		opacity: 0;
+		transition: opacity .25s
+	}
+	&:hover{
+		&::-webkit-scrollbar {
+			opacity: 1
+		}
 	}
 `;
 

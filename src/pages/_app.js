@@ -103,6 +103,7 @@ const Divider = styled.hr`
 	border-top: 1px solid #aaaaaaaa;
 	justify-self: center;
 	margin: 0;
+	margin-top: 1rem;
 `;
 
 import { createGlobalStyle } from "styled-components";
@@ -148,7 +149,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps, ...props }) {
-	const isError = props.router.route === "/_error";
+	const HideSidebar = props.router.route === "/_error" || props.router.route.includes("auth");
 	return (
 		<>
 			<SEO title="Social Media For Movies"></SEO>
@@ -156,7 +157,7 @@ function MyApp({ Component, pageProps, ...props }) {
 				<GlobalStyle />
 				<Header />
 				<Body>
-					{!isError && (
+					{!HideSidebar && (
 						<Sidebar open>
 							<SidebarContent>
 								<LinkList>

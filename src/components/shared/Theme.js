@@ -14,7 +14,7 @@ const getTheme = theme => {
                     },
                     secondary: {
                         normal: "#ff424f",
-                        light: "#a4b3bc",
+                        light: "#FF525E",
                         dark: "#f7313f",
                         text: "black"
                     }
