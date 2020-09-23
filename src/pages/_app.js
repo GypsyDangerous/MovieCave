@@ -89,6 +89,9 @@ function MyApp({ Component, pageProps, ...props }) {
 									<NavLink href="/popular" activeClassName="active-link">
 										<ListLink>Popular</ListLink>
 									</NavLink>
+									<NavLink href="/latest" activeClassName="active-link">
+										<ListLink>Latest</ListLink>
+									</NavLink>
 									<NavLink href="/now-playing" activeClassName="active-link">
 										<ListLink>Now Playing</ListLink>
 									</NavLink>
