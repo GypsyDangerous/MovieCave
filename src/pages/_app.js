@@ -27,8 +27,19 @@ const ListLink = styled.a`
 	cursor: pointer;
 	position: relative;
 	&.active-link {
-		background: ${props => props.theme.colors.primary.normal};
-
+		// background-color: ${props => props.theme.colors.primary.normal};
+		&:before{
+			border-radius: .5rem 0 0 .5rem;
+			animation: slide-background-in .5s forwards;
+			// width: 100%;
+			height: 100%;
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			background: ${props => props.theme.colors.primary.normal};
+		}
 		&:after {
 			content: "\\2192";
 			font-size: 1.25rem;
@@ -36,7 +47,9 @@ const ListLink = styled.a`
 			top: 50%;
 			color: #aaa;
 			right: 1rem;
-			transform: translateY(-55%);
+			// opacity: 0;
+			animation: slide-in .5s forwards;
+			// transform: translateY(-55%);
 		}
 	}
 `;
