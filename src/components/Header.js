@@ -1,7 +1,7 @@
 import StyledHeader from "./Styled components/Header";
 import styled from "styled-components";
 import NavLink from "./shared/NavLink";
-import Color from "color"
+import Color from "color";
 
 const HeaderContent = styled.div`
 	height: 100%;
@@ -16,28 +16,32 @@ const Media = styled.div`
 	align-items: center;
 	display: flex;
 	// outline: solid;
-	a{
-		border-radius: .5rem;
-		padding: .5rem 1rem;
-		margin: 0 .25rem;
+	a {
+		border-radius: 0.5rem;
+		padding: 0.5rem 1rem;
+		margin: 0 0.25rem;
 		border: 1px solid transparent;
-		&:hover, &:focus &.active{
+		&:hover,
+		&:focus &.active {
 			outline: none;
 			background: ${props => props.theme.colors.secondary.dark};
-			border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(.25).hex()};
+			border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(0.25).hex()};
 		}
 	}
 `;
 
 const LogoContainer = styled.div`
 	height: 100%;
-	width: 320px;
+	min-width: 320px;
 	background: ${props => props.theme.colors.secondary.dark};
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	h1 {
 		margin: 0;
+	}
+	@media screen and (max-width: 768px) {
+		min-width: 240px;
 	}
 `;
 
@@ -49,8 +53,12 @@ const Header = () => {
 					<h1>SMFM</h1>
 				</LogoContainer>
 				<Media>
-					<NavLink activeClassName="active" href="/auth/login"><a>Login</a></NavLink>
-					<NavLink activeClassName="active" href="/auth/register"><a>Sign Up</a></NavLink>
+					<NavLink activeClassName="active" href="/auth/login">
+						<a>Login</a>
+					</NavLink>
+					<NavLink activeClassName="active" href="/auth/register">
+						<a>Sign Up</a>
+					</NavLink>
 				</Media>
 			</HeaderContent>
 		</StyledHeader>

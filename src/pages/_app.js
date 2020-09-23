@@ -29,7 +29,15 @@ const SidebarContent = styled.div`
 		// background-color: ${props => props.theme.colors.primary.normal};
 		&:before{
 			border-radius: .5rem 0 0 .5rem;
-			animation: slide-background-in .5s forwards;
+			// animation: slide-background-in .5s forwards;
+			@media screen and (min-width: 768px) {
+				
+				animation: slide-background-in 0.5s forwards;
+			}
+			@media screen and (max-width: 768px){
+				width: 100%;
+				height: 100%;
+			}
 			// width: 100%;
 			height: 100%;
 			content: "";
@@ -64,10 +72,9 @@ const ListLink = styled.a`
 	&.active-link {
 		color: ${props => props.theme.colors.secondary.normal};
 		// background-color: ${props => props.theme.colors.primary.normal};
-		&:before{
-			border-radius: .5rem 0 0 .5rem;
-			animation: slide-background-in .5s forwards;
-			// width: 100%;
+		&:before {
+			border-radius: 0.5rem 0 0 0.5rem;
+
 			height: 100%;
 			content: "";
 			position: absolute;
@@ -84,7 +91,7 @@ const ListLink = styled.a`
 			color: #aaa;
 			right: 1rem;
 			// opacity: 0;
-			animation: slide-in .5s forwards;
+			animation: slide-in 0.5s forwards;
 			// transform: translateY(-55%);
 		}
 	}
@@ -105,7 +112,8 @@ const GlobalStyle = createGlobalStyle`
     body {
     	padding: 0;
         margin: 0;
-        font-family: ${props => props.theme.fonts.join(", ")};
+		font-family: ${props => props.theme.fonts.join(", ")};
+		overflow: hidden;
     }
 
     a {
@@ -116,7 +124,27 @@ const GlobalStyle = createGlobalStyle`
 
     * {
     	box-sizing: border-box;
-    }
+	}
+	
+	::-webkit-scrollbar {
+		width: 8px;
+	  }
+	  
+	  /* Track */
+	  ::-webkit-scrollbar-track {
+		background: ${props => props.theme.colors.primary.normal};
+	  }
+	  
+	  /* Handle */
+	  ::-webkit-scrollbar-thumb {
+		background: ${props => props.theme.colors.secondary.dark};
+		border-radius: .5rem;
+	  }
+	  
+	  /* Handle on hover */
+	  ::-webkit-scrollbar-thumb:hover {
+		background: ${props => props.theme.colors.secondary.normal};
+	  }
 `;
 
 function MyApp({ Component, pageProps, ...props }) {
