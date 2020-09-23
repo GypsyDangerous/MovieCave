@@ -24,20 +24,20 @@ const ListLink = styled.a`
 	font-size: 1rem;
 	padding: 1rem;
 	padding-right: 0;
-    cursor: pointer;
-    position: relative;
+	cursor: pointer;
+	position: relative;
 	&.active-link {
-        background: ${props => props.theme.colors.primary.normal};
+		background: ${props => props.theme.colors.primary.normal};
 
-        &:after{
-            content: "\\2192";
-            font-size: 1.25rem;
-            position: absolute;
-            top: 50%;
-            color: #aaa;
-            right: 1rem;
-            transform: translateY(-55%)
-        }
+		&:after {
+			content: "\\2192";
+			font-size: 1.25rem;
+			position: absolute;
+			top: 50%;
+			color: #aaa;
+			right: 1rem;
+			transform: translateY(-55%);
+		}
 	}
 `;
 
@@ -49,11 +49,9 @@ const Divider = styled.hr`
 	margin: 0;
 `;
 
-
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-
     html,
     body {
     	padding: 0;
@@ -72,7 +70,8 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, ...props }) {
+	const isError = props.router.route === "/_error";
 	return (
 		<>
 			<SEO title="IMNOTDB"></SEO>
@@ -80,31 +79,33 @@ function MyApp({ Component, pageProps }) {
 				<GlobalStyle />
 				<Header />
 				<Body>
-					<Sidebar>
-						<SidebarContent>
-							<LinkList>
-								<NavLink href="/" activeClassName="active-link">
-									<ListLink>My Feed</ListLink>
-								</NavLink>
-								<NavLink href="/popular" activeClassName="active-link">
-									<ListLink>Popular</ListLink>
-								</NavLink>
-								<NavLink href="/now-playing" activeClassName="active-link">
-									<ListLink>Now Playing</ListLink>
-								</NavLink>
-								<NavLink href="/upcoming" activeClassName="active-link">
-									<ListLink>Up Coming</ListLink>
-								</NavLink>
-								<NavLink href="/top-rated" activeClassName="active-link">
-									<ListLink>Top Rated</ListLink>
-								</NavLink>
-							</LinkList>
-						</SidebarContent>
-						<Divider />
-						<SidebarContent>
-							<h3>Latest Activity</h3>
-						</SidebarContent>
-					</Sidebar>
+					{!isError && (
+						<Sidebar>
+							<SidebarContent>
+								<LinkList>
+									<NavLink href="/" activeClassName="active-link">
+										<ListLink>My Feed</ListLink>
+									</NavLink>
+									<NavLink href="/popular" activeClassName="active-link">
+										<ListLink>Popular</ListLink>
+									</NavLink>
+									<NavLink href="/now-playing" activeClassName="active-link">
+										<ListLink>Now Playing</ListLink>
+									</NavLink>
+									<NavLink href="/upcoming" activeClassName="active-link">
+										<ListLink>Up Coming</ListLink>
+									</NavLink>
+									<NavLink href="/top-rated" activeClassName="active-link">
+										<ListLink>Top Rated</ListLink>
+									</NavLink>
+								</LinkList>
+							</SidebarContent>
+							<Divider />
+							<SidebarContent>
+								<h3>Latest Activity</h3>
+							</SidebarContent>
+						</Sidebar>
+					)}
 					<Component {...pageProps} />
 				</Body>
 				{/* <Footer /> */}
