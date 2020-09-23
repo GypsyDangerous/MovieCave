@@ -11,11 +11,11 @@ const HeaderContent = styled.div`
 
 const Media = styled.div`
 	height: 100%;
-	flex: 0.2;
+	// flex: 0.25;
+	padding-right: 1rem;
 	align-items: center;
 	display: flex;
-	// justify-content: space-evenly;
-	
+	// outline: solid;
 	a{
 		border-radius: .5rem;
 		padding: .5rem 1rem;
