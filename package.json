@@ -8,6 +8,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"color": "^3.1.2",
 		"fetchio-js": "^1.1.1",
 		"next": "9.5.3",
 		"react": "16.13.1",
