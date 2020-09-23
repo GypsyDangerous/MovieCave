@@ -129,7 +129,7 @@ function MyApp({ Component, pageProps, ...props }) {
 				<Header />
 				<Body>
 					{!isError && (
-						<Sidebar>
+						<Sidebar open>
 							<SidebarContent>
 								<LinkList>
 									<NavLink href="/" activeClassName="active-link">
