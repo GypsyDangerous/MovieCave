@@ -15,7 +15,7 @@ const SidebarContent = styled.div`
 	width: 100%;
 	flex: 1;
 	&:first-child {
-		flex: 0.25;
+		flex: 0.15;
 	}
 `;
 

@@ -8,8 +8,6 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"dotenv": "^8.2.0",
-		"fetchio": "^1.0.0",
 		"fetchio-js": "^1.1.1",
 		"next": "9.5.3",
 		"react": "16.13.1",
