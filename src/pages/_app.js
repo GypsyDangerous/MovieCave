@@ -123,7 +123,7 @@ function MyApp({ Component, pageProps, ...props }) {
 	const isError = props.router.route === "/_error";
 	return (
 		<>
-			<SEO title="IMNOTDB"></SEO>
+			<SEO title="Social Media For Movies"></SEO>
 			<Theme>
 				<GlobalStyle />
 				<Header />
