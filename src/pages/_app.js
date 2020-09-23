@@ -17,6 +17,41 @@ const SidebarContent = styled.div`
 	&:first-child {
 		flex: 0.15;
 	}
+	a{
+		color: ${props => props.theme.colors.primary.text};
+	font-size: 1rem;
+	padding: 1rem;
+	padding-right: 0;
+	cursor: pointer;
+	position: relative;
+	&.active-link {
+		color: ${props => props.theme.colors.secondary.normal};
+		// background-color: ${props => props.theme.colors.primary.normal};
+		&:before{
+			border-radius: .5rem 0 0 .5rem;
+			animation: slide-background-in .5s forwards;
+			// width: 100%;
+			height: 100%;
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			background: ${props => props.theme.colors.primary.normal};
+		}
+		&:after {
+			content: "\\2192";
+			font-size: 1.25rem;
+			position: absolute;
+			top: 50%;
+			color: #aaa;
+			right: 1rem;
+			// opacity: 0;
+			animation: slide-in .5s forwards;
+			// transform: translateY(-55%);
+		}
+	}
+	
 `;
 
 const ListLink = styled.a`
@@ -27,6 +62,7 @@ const ListLink = styled.a`
 	cursor: pointer;
 	position: relative;
 	&.active-link {
+		color: ${props => props.theme.colors.secondary.normal};
 		// background-color: ${props => props.theme.colors.primary.normal};
 		&:before{
 			border-radius: .5rem 0 0 .5rem;
@@ -97,22 +133,22 @@ function MyApp({ Component, pageProps, ...props }) {
 							<SidebarContent>
 								<LinkList>
 									<NavLink href="/" activeClassName="active-link">
-										<ListLink>My Feed</ListLink>
+										<a>My Feed</a>
 									</NavLink>
 									<NavLink href="/popular" activeClassName="active-link">
-										<ListLink>Popular</ListLink>
+										<a>Popular</a>
 									</NavLink>
 									<NavLink href="/latest" activeClassName="active-link">
-										<ListLink>Latest</ListLink>
+										<a>Latest</a>
 									</NavLink>
 									<NavLink href="/now-playing" activeClassName="active-link">
-										<ListLink>Now Playing</ListLink>
+										<a>Now Playing</a>
 									</NavLink>
 									<NavLink href="/upcoming" activeClassName="active-link">
-										<ListLink>Up Coming</ListLink>
+										<a>Up Coming</a>
 									</NavLink>
 									<NavLink href="/top-rated" activeClassName="active-link">
-										<ListLink>Top Rated</ListLink>
+										<a>Top Rated</a>
 									</NavLink>
 								</LinkList>
 							</SidebarContent>
