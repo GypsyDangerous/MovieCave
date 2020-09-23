@@ -6,13 +6,20 @@ const getTheme = theme => {
 		default:
 			return {
 				colors: {
-					primary: "#292626",
-					secondary: "#C96333",
-					primaryText: "#AAAFAA",
-					primaryDarkText: "#7C7C7C",
-					secondaryText: "#292626",
+					primary: {
+                        normal: "#222b31",
+                        light: "#515151",
+                        dark: "#191c1f",
+                        text: "white"
+                    },
+                    secondary: {
+                        normal: "#ff424f",
+                        light: "#a4b3bc",
+                        dark: "#f7313f",
+                        text: "black"
+                    }
 				},
-				fonts: ["Montserrat", "sans-serif"],
+				fonts: ["poppins", "sans-serif"],
 				fontSizes: {
 					small: ".75rem",
 					medium: "1.25rem",
