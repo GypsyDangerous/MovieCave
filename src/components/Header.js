@@ -2,6 +2,8 @@ import StyledHeader from "./Styled components/Header";
 import styled from "styled-components";
 import NavLink from "./shared/NavLink";
 import Color from "color";
+import Link from "next/link"
+
 
 const HeaderContent = styled.div`
 	height: 100%;
@@ -50,7 +52,7 @@ const Header = () => {
 		<StyledHeader>
 			<HeaderContent>
 				<LogoContainer>
-					<h1>SMFM</h1>
+					<Link href="/"><a><h1>SMFM</h1></a></Link>
 				</LogoContainer>
 				<Media>
 					<NavLink activeClassName="active" href="/auth/login">

@@ -94,7 +94,7 @@ const FormContainer = styled.div`
 const AuthPage = ({ type }) => {
 	return (
 		<Content>
-			<AuthContainer>
+			<AuthContainer className={type === "login" ? "login" : ""}>
 				<AuthBody>
 					<AuthBackground />
 					<AuthForms>
@@ -111,6 +111,7 @@ const AuthPage = ({ type }) => {
 };
 
 AuthPage.getInitialProps = async ({ req, query }) => {
+    console.log(query)
 	return query;
 };
 
