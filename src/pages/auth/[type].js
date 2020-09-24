@@ -205,7 +205,7 @@ const AuthPage = ({ type }) => {
 								console.log(new FormData(e.target));
 							}}
 						>
-							<TextInput type="text" required placeholder="Username" />
+							<TextInput type="email" required placeholder="Email" />
 							<TextInput type="password" required placeholder="Password" />
 							<SubmitButton type="submit" value="Login" />
 						</AuthForm>
