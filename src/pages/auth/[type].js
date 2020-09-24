@@ -92,6 +92,7 @@ const FormContainer = styled.div`
 	top: -30px;
 	left: 30px;
 	transition: 0.5s;
+	display: flex;
 	.register & {
 		left: 295px;
 	}
@@ -106,16 +107,47 @@ const InfoButton = styled.button`
 	padding: 0.5rem 1rem;
 	margin: 0 0.25rem;
 	border: 1px solid ${props => new Color(props.theme.colors.secondary.text).darken(0.25).hex()};
-    color: ${props => props.theme.colors.secondary.text};
-    outline: none;
+	color: ${props => props.theme.colors.secondary.text};
+	outline: none;
 	background: none;
 	font-size: 1.25rem;
 	&:hover,
 	&:focus &.active {
 		outline: none;
 		background: ${props => props.theme.colors.secondary.dark};
-		border: 1px solid ${props => new Color(props.theme.colors.secondary.text).darken(0.25).alpha(.5).hex()};
+		border: 1px solid ${props => new Color(props.theme.colors.secondary.text).darken(0.25).alpha(0.5).hex()};
 	}
+`;
+
+const AuthForm = styled.form`
+	height: 380px;
+	min-width: 305px;
+	position: absolute;
+	transition: 0.5s;
+	left: 0;
+	opacity: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: ${props => props.theme.colors.primary.text};
+	&:first-child {
+		.login & {
+			left: 100%;
+			opacity: 0;
+		}
+	}
+	&:last-child {
+		.register & {
+			left: -100%;
+			opactity: 0;
+		}
+	}
+`;
+
+const TextInput = styled.input`
+	padding: 0.5rem 1rem;
+	margin: 0.5rem;
 `;
 
 const AuthPage = ({ type }) => {
@@ -127,14 +159,42 @@ const AuthPage = ({ type }) => {
 					<AuthInfo>
 						<InfoItem>
 							<InfoP>Have an Account?</InfoP>
-							<Link href="login"><a><InfoButton>Login</InfoButton></a></Link>
+							<Link href="login">
+								<a>
+									<InfoButton>Login</InfoButton>
+								</a>
+							</Link>
 						</InfoItem>
 						<InfoItem>
 							<InfoP>Don't Have an Account?</InfoP>
-							<Link href="register"><a><InfoButton>Sign Up</InfoButton></a></Link>
+							<Link href="register">
+								<a>
+									<InfoButton>Sign Up</InfoButton>
+								</a>
+							</Link>
 						</InfoItem>
 					</AuthInfo>
-					<FormContainer></FormContainer>
+					<FormContainer>
+						<AuthForm
+							onSubmit={e => {
+								e.preventDefault();
+							}}
+						>
+							<TextInput type="email" placeholder="Email" required />
+							<TextInput type="text" required placeholder="Username" />
+							<TextInput type="password" required placeholder="Password" />
+							<input type="submit" value="Sign Up" />
+						</AuthForm>
+						<AuthForm
+							onSubmit={e => {
+								e.preventDefault();
+							}}
+						>
+							<TextInput type="text" required placeholder="Username" />
+							<TextInput type="password" required placeholder="Password" />
+							<input type="submit" value="Login" />
+						</AuthForm>
+					</FormContainer>
 				</AuthForms>
 			</AuthBody>
 		</AuthContainer>
