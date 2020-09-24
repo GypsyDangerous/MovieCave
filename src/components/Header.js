@@ -24,10 +24,12 @@ const Media = styled.div`
 		border-radius: 0.5rem;
 		padding: 0.5rem 1rem;
 		margin: 0 0.25rem;
-		border: 1px solid transparent;
+        border: 1px solid transparent;
+        color: ${props => props.theme.colors.secondary.text};
+        outline: none;
 		&:hover,
-		&:focus &.active {
-			outline: none;
+		&:focus, &.active {
+			outline: none !important;
 			background: ${props => props.theme.colors.secondary.dark};
 			border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(0.25).hex()};
 		}

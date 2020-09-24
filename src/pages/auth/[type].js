@@ -105,7 +105,7 @@ const InfoButton = styled.button`
 	border-radius: 0.5rem;
 	padding: 0.5rem 1rem;
 	margin: 0 0.25rem;
-	border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(0.25).hex()};
+	border: 1px solid ${props => new Color(props.theme.colors.secondary.text).darken(0.25).hex()};
     color: ${props => props.theme.colors.secondary.text};
     outline: none;
 	background: none;
@@ -114,7 +114,7 @@ const InfoButton = styled.button`
 	&:focus &.active {
 		outline: none;
 		background: ${props => props.theme.colors.secondary.dark};
-		border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(0.25).hex()};
+		border: 1px solid ${props => new Color(props.theme.colors.secondary.text).darken(0.25).alpha(.5).hex()};
 	}
 `;
 
@@ -142,7 +142,6 @@ const AuthPage = ({ type }) => {
 };
 
 AuthPage.getInitialProps = async ({ req, query }) => {
-	console.log(query);
 	return query;
 };
 

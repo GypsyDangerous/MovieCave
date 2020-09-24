@@ -16,7 +16,7 @@ const getTheme = theme => {
                         normal: "#ff424f",
                         light: "#FF525E",
                         dark: "#f7313f",
-                        text: "white"
+                        text: "black"
                     }
 				},
 				fonts: ["poppins", "sans-serif"],
