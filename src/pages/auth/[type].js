@@ -150,6 +150,19 @@ const TextInput = styled.input`
 	margin: 0.5rem;
 `;
 
+const SubmitButton = styled.input`
+	cursor: pointer;
+	text-align: center;
+	margin-top: 2rem;
+	border: none;
+	// border: solid ${props => props.theme.colors.primary.light};
+	// border-radius: .5rem;
+	color: ${props => props.theme.colors.primary.text};
+	background: ${props => props.theme.colors.primary.normal};
+	padding: 0.75rem 1.25rem;
+	box-shadow: 0 0 10px 1px ${props => props.theme.colors.primary.normal};
+`;
+
 const AuthPage = ({ type }) => {
 	return (
 		<AuthContainer className={type}>
@@ -178,21 +191,23 @@ const AuthPage = ({ type }) => {
 						<AuthForm
 							onSubmit={e => {
 								e.preventDefault();
+								console.log(...new FormData(e.target), e.target);
 							}}
 						>
-							<TextInput type="email" placeholder="Email" required />
-							<TextInput type="text" required placeholder="Username" />
-							<TextInput type="password" required placeholder="Password" />
-							<input type="submit" value="Sign Up" />
+							<TextInput name="email" type="email" placeholder="Email" required />
+							<TextInput name="username" type="text" required placeholder="Username" />
+							<TextInput type="password" name="password" required placeholder="Password" />
+							<SubmitButton type="submit" value="Sign Up" />
 						</AuthForm>
 						<AuthForm
 							onSubmit={e => {
 								e.preventDefault();
+								console.log(new FormData(e.target));
 							}}
 						>
 							<TextInput type="text" required placeholder="Username" />
 							<TextInput type="password" required placeholder="Password" />
-							<input type="submit" value="Login" />
+							<SubmitButton type="submit" value="Login" />
 						</AuthForm>
 					</FormContainer>
 				</AuthForms>
