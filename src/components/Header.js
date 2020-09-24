@@ -2,8 +2,10 @@ import StyledHeader from "./Styled components/Header";
 import styled from "styled-components";
 import NavLink from "./shared/NavLink";
 import Color from "color";
-import Link from "next/link"
-
+import Link from "next/link";
+import { HamburgerButton } from "react-hamburger-button";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
 const HeaderContent = styled.div`
 	height: 100%;
@@ -38,9 +40,16 @@ const LogoContainer = styled.div`
 	background: ${props => props.theme.colors.secondary.dark};
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	h1 {
-		margin: 0;
+	justify-content: space-around;
+	a {
+		display: flex;
+		align-items: center;
+		color: white;
+		img {
+		}
+		* {
+			margin: 0 0.5rem;
+		}
 	}
 	@media screen and (max-width: 768px) {
 		min-width: 240px;
@@ -48,11 +57,26 @@ const LogoContainer = styled.div`
 `;
 
 const Header = () => {
+    const {sidebarOpen, setSidebarOpen} = useContext(AppContext)
 	return (
 		<StyledHeader>
 			<HeaderContent>
 				<LogoContainer>
-					<Link href="/"><a><h1>SMFM</h1></a></Link>
+					<HamburgerButton
+						open={sidebarOpen}
+						onClick={() => setSidebarOpen(prev => !prev)}
+						width={30}
+						height={30}
+						strokeWidth={3}
+						color="white"
+						animationDuration={0.5}
+					/>
+					<Link href="/">
+						<a>
+							<img src="/logo.png" alt="" width="50" />
+							<h1>SMFM</h1>
+						</a>
+					</Link>
 				</LogoContainer>
 				<Media>
 					<NavLink activeClassName="active" href="/auth/login">

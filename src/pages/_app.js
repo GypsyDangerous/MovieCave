@@ -8,6 +8,8 @@ import Sidebar from "../components/Styled components/Sidebar";
 import LinkList from "../components/Styled components/LinkList";
 import NavLink from "../components/shared/NavLink";
 import styled from "styled-components";
+import { AppContext, AppContextProvider } from "../contexts/AppContext";
+import Content from "../components/Styled components/Content"
 
 const SidebarContent = styled.div`
 	display: flex;
@@ -107,6 +109,7 @@ const Divider = styled.hr`
 `;
 
 import { createGlobalStyle } from "styled-components";
+import { useContext } from "react";
 
 const GlobalStyle = createGlobalStyle`
     html,
@@ -148,46 +151,57 @@ const GlobalStyle = createGlobalStyle`
 	  }
 `;
 
+function App({ children, HideSidebar, Component, pageProps, ...props }) {
+	const { sidebarOpen } = useContext(AppContext);
+	return (
+		<Theme>
+			<GlobalStyle />
+			<Header />
+			<Body>
+				{!HideSidebar && (
+					<Sidebar open={sidebarOpen}>
+						<SidebarContent>
+							<LinkList>
+								<NavLink href="/" activeClassName="active-link">
+									<a>My Feed</a>
+								</NavLink>
+								<NavLink href="/popular" activeClassName="active-link">
+									<a>Popular</a>
+								</NavLink>
+								<NavLink href="/now-playing" activeClassName="active-link">
+									<a>Now Playing</a>
+								</NavLink>
+								<NavLink href="/upcoming" activeClassName="active-link">
+									<a>Up Coming</a>
+								</NavLink>
+								<NavLink href="/top-rated" activeClassName="active-link">
+									<a>Top Rated</a>
+								</NavLink>
+							</LinkList>
+						</SidebarContent>
+						<Divider />
+						<SidebarContent>
+							<h3>Latest Activity</h3>
+						</SidebarContent>
+					</Sidebar>
+				)}
+				<Content sidebarOpen={sidebarOpen && !HideSidebar}>
+					<Component {...pageProps} />
+				</Content>
+			</Body>
+			{/* <Footer /> */}
+		</Theme>
+	);
+}
+
 function MyApp({ Component, pageProps, ...props }) {
 	const HideSidebar = props.router.route === "/_error" || props.router.route.includes("auth");
 	return (
 		<>
 			<SEO title="Social Media For Movies"></SEO>
-			<Theme>
-				<GlobalStyle />
-				<Header />
-				<Body>
-					{!HideSidebar && (
-						<Sidebar open>
-							<SidebarContent>
-								<LinkList>
-									<NavLink href="/" activeClassName="active-link">
-										<a>My Feed</a>
-									</NavLink>
-									<NavLink href="/popular" activeClassName="active-link">
-										<a>Popular</a>
-									</NavLink>
-									<NavLink href="/now-playing" activeClassName="active-link">
-										<a>Now Playing</a>
-									</NavLink>
-									<NavLink href="/upcoming" activeClassName="active-link">
-										<a>Up Coming</a>
-									</NavLink>
-									<NavLink href="/top-rated" activeClassName="active-link">
-										<a>Top Rated</a>
-									</NavLink>
-								</LinkList>
-							</SidebarContent>
-							<Divider />
-							<SidebarContent>
-								<h3>Latest Activity</h3>
-							</SidebarContent>
-						</Sidebar>
-					)}
-					<Component {...pageProps} />
-				</Body>
-				{/* <Footer /> */}
-			</Theme>
+			<AppContextProvider>
+				<App Component={Component} pageProps={pageProps} {...props} HideSidebar={HideSidebar} />
+			</AppContextProvider>
 		</>
 	);
 }

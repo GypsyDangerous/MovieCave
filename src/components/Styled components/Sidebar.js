@@ -5,13 +5,15 @@ const height = "calc(100vh - 64px)";
 const Sidebar = styled.div`
 	max-height: ${height};
 	min-height: ${height};
-	overflow: ${props => (props.open ? "auto" : "hidden")};
-	width: ${props => (props.open ? "320px" : "0px")};
-	transition: width padding 0.5s;
+    overflow: auto;
+	width: 320px;
+	transition: transform 0.5s;
 	position: fixed;
 	display: flex;
 	flex-direction: column;
-	padding: ${props => (props.open ? "2rem" : "0px")};
+    padding: 2rem;
+    transform-origin: left;
+    transform: scaleX(${props => props.open ? "1" : "0"});
 	padding-right: 0;
 	background: ${props => props.theme.colors.primary.dark};
 	&::-webkit-scrollbar {
