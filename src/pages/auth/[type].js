@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Content from "../../components/Styled components/Content";
 import Color from "color";
+import Link from "next/link";
 
 const AuthContainer = styled.div`
 	height: 100%;
@@ -11,7 +12,7 @@ const AuthContainer = styled.div`
 	justify-content: center;
 `;
 
-const width = "640px";
+const width = "620px";
 const height = "320px";
 
 const AuthBody = styled.div`
@@ -45,12 +46,12 @@ const AuthBackground = styled.div`
 		width: 320px;
 		height: 180px;
 	}
-	.login &::before {
+	.register &::before {
 		left: 180px;
 		top: 62px;
 		height: 265px;
 	}
-	.login &::after {
+	.register &::after {
 		top: 22px;
 		left: 192px;
 		width: 324px;
@@ -65,6 +66,8 @@ const AuthForms = styled.div`
 const AuthInfo = styled.div`
 	text-align: left;
 	font-size: 0;
+	display: flex;
+	justify-content: space-between;
 `;
 const InfoItem = styled.div`
 	text-align: center;
@@ -74,7 +77,10 @@ const InfoItem = styled.div`
 	display: inline-block;
 	vertical-align: top;
 	color: ${props => props.theme.colors.secondary.text};
-	opactiy: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 `;
 
 const FormContainer = styled.div`
@@ -86,32 +92,57 @@ const FormContainer = styled.div`
 	top: -30px;
 	left: 30px;
 	transition: 0.5s;
-	.login & {
+	.register & {
 		left: 295px;
+	}
+`;
+
+const InfoP = styled.p`
+	font-size: 1.25rem;
+`;
+
+const InfoButton = styled.button`
+	border-radius: 0.5rem;
+	padding: 0.5rem 1rem;
+	margin: 0 0.25rem;
+	border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(0.25).hex()};
+    color: ${props => props.theme.colors.secondary.text};
+    outline: none;
+	background: none;
+	font-size: 1.25rem;
+	&:hover,
+	&:focus &.active {
+		outline: none;
+		background: ${props => props.theme.colors.secondary.dark};
+		border: 1px solid ${props => new Color(props.theme.colors.secondary.dark).darken(0.25).hex()};
 	}
 `;
 
 const AuthPage = ({ type }) => {
 	return (
-		<Content>
-			<AuthContainer className={type === "login" ? "login" : ""}>
-				<AuthBody>
-					<AuthBackground />
-					<AuthForms>
-						<AuthInfo>
-							<InfoItem></InfoItem>
-							<InfoItem></InfoItem>
-						</AuthInfo>
-						<FormContainer></FormContainer>
-					</AuthForms>
-				</AuthBody>
-			</AuthContainer>
-		</Content>
+		<AuthContainer className={type}>
+			<AuthBody>
+				<AuthBackground />
+				<AuthForms>
+					<AuthInfo>
+						<InfoItem>
+							<InfoP>Have an Account?</InfoP>
+							<Link href="login"><a><InfoButton>Login</InfoButton></a></Link>
+						</InfoItem>
+						<InfoItem>
+							<InfoP>Don't Have an Account?</InfoP>
+							<Link href="register"><a><InfoButton>Sign Up</InfoButton></a></Link>
+						</InfoItem>
+					</AuthInfo>
+					<FormContainer></FormContainer>
+				</AuthForms>
+			</AuthBody>
+		</AuthContainer>
 	);
 };
 
 AuthPage.getInitialProps = async ({ req, query }) => {
-    console.log(query)
+	console.log(query);
 	return query;
 };
 
