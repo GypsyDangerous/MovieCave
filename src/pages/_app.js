@@ -11,6 +11,14 @@ import styled from "styled-components";
 import { AppContext, AppContextProvider } from "../contexts/AppContext";
 import Content from "../components/Styled components/Content"
 
+import Router from "next/router";
+import NProgress from "nprogress"; //nprogress module
+import "nprogress/nprogress.css"; //styles of nprogress
+//Binding events.
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
+
 const SidebarContent = styled.div`
 	display: flex;
 	color: ${props => props.theme.colors.primary.text};
@@ -156,7 +164,7 @@ function App({ children, HideSidebar, Component, pageProps, ...props }) {
 	return (
 		<Theme>
 			<GlobalStyle />
-			<Header />
+			<Header HideSidebar={HideSidebar}/>
 			<Body>
 				{!HideSidebar && (
 					<Sidebar open={sidebarOpen}>

@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Content from "../../components/Styled components/Content";
 import Color from "color";
 import Link from "next/link";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {  withStyles, } from "@material-ui/core/styles";
+
+const CssTextField = withStyles({
+	root: {
+		"& .MuiOutlinedInput-root": {
+			"& fieldset": {
+				borderColor: "#ccc",
+			},
+			"&:hover fieldset": {
+				borderColor: "white",
+			},
+		},
+	},
+})(FormControl);
+
+const WhiteInput = withStyles({
+	root: {
+		"& .MuiOutlinedInput-root": {
+			"& fieldset": {
+				borderColor: "#ccc",
+			},
+			"&:hover fieldset": {
+				borderColor: "white",
+			},
+		},
+	},
+})(TextField);
 
 const AuthContainer = styled.div`
 	height: 100%;
@@ -61,6 +94,10 @@ const AuthBackground = styled.div`
 
 const AuthForms = styled.div`
 	position: relative;
+	@media screen and (max-width: 625px) {
+		width: 100vw;
+		left: 0 !important;
+	}
 `;
 
 const AuthInfo = styled.div`
@@ -69,6 +106,7 @@ const AuthInfo = styled.div`
 	display: flex;
 	justify-content: space-between;
 `;
+
 const InfoItem = styled.div`
 	text-align: center;
 	font-size: 1rem;
@@ -91,10 +129,17 @@ const FormContainer = styled.div`
 	background: ${props => props.theme.colors.primary.dark};
 	top: -30px;
 	left: 30px;
-	transition: 0.5s;
+	transition: left 0.5s, border-radius 0.5s;
 	display: flex;
+	&:hover {
+		border-radius: 0.5rem;
+	}
 	.register & {
 		left: 295px;
+	}
+	@media screen and (max-width: 625px) {
+		width: 100vw;
+		left: 0 !important;
 	}
 `;
 
@@ -120,6 +165,25 @@ const InfoButton = styled.button`
 `;
 
 const AuthForm = styled.form`
+	&,
+	& * {
+		color: white !important;
+		// border-color: white;
+	}
+	.MuiFormControl-root {
+		width: 70% !important;
+		margin: 0.5rem;
+		& fieldset {
+			border-color: "red";
+		}
+
+		&:hover fieldset {
+			border-color: "yellow";
+		}
+		&.mui-focused fieldset {
+			border-color: "green";
+		}
+	}
 	height: 380px;
 	min-width: 305px;
 	position: absolute;
@@ -143,6 +207,10 @@ const AuthForm = styled.form`
 			opactity: 0;
 		}
 	}
+	@media screen and (max-width: 625px) {
+		width: 100vw;
+		// left: 0 !important;
+	}
 `;
 
 const TextInput = styled.input`
@@ -153,7 +221,7 @@ const TextInput = styled.input`
 const SubmitButton = styled.input`
 	cursor: pointer;
 	text-align: center;
-	margin-top: 2rem;
+	margin-top: 0.5rem;
 	border: none;
 	// border: solid ${props => props.theme.colors.primary.light};
 	// border-radius: .5rem;
@@ -163,7 +231,12 @@ const SubmitButton = styled.input`
 	box-shadow: 0 0 10px 1px ${props => props.theme.colors.primary.normal};
 `;
 
+const FormTitle = styled.h1`
+	text-transform: uppercase;
+`;
+
 const AuthPage = ({ type }) => {
+	const [showPassword, setShowPassword] = useState(false);
 	return (
 		<AuthContainer className={type}>
 			<AuthBody>
@@ -194,9 +267,31 @@ const AuthPage = ({ type }) => {
 								console.log(...new FormData(e.target), e.target);
 							}}
 						>
-							<TextInput name="email" type="email" placeholder="Email" required />
-							<TextInput name="username" type="text" required placeholder="Username" />
-							<TextInput type="password" name="password" required placeholder="Password" />
+							<FormTitle>Sign Up</FormTitle>
+							<WhiteInput required name="email" id="register-email" label="Email" type="email" variant="outlined" />
+							<WhiteInput required name="username" id="register-username" label="Username" variant="outlined" />
+							<WhiteInput
+								required
+								id="create-password"
+								variant="outlined"
+								label="Password"
+								name="create-password"
+								type={showPassword ? "text" : "password"}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												aria-label="toggle password visibility"
+												onClick={e => setShowPassword(prev => !prev)}
+												onMouseDown={e => e.preventDefault()}
+											>
+												{showPassword ? <Visibility /> : <VisibilityOff />}
+											</IconButton>
+										</InputAdornment>
+									),
+								}}
+							/>
+
 							<SubmitButton type="submit" value="Sign Up" />
 						</AuthForm>
 						<AuthForm
@@ -205,8 +300,29 @@ const AuthPage = ({ type }) => {
 								console.log(new FormData(e.target));
 							}}
 						>
-							<TextInput type="email" required placeholder="Email" />
-							<TextInput type="password" required placeholder="Password" />
+							<FormTitle>Login</FormTitle>
+							<WhiteInput required name="email" id="login-email" label="Email" type="email" variant="outlined" />
+							<WhiteInput
+								required
+								id="enter-password"
+								variant="outlined"
+								label="Password"
+								name="enter-password"
+								type={showPassword ? "text" : "password"}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												aria-label="toggle password visibility"
+												onClick={e => setShowPassword(prev => !prev)}
+												onMouseDown={e => e.preventDefault()}
+											>
+												{showPassword ? <Visibility /> : <VisibilityOff />}
+											</IconButton>
+										</InputAdornment>
+									),
+								}}
+							/>
 							<SubmitButton type="submit" value="Login" />
 						</AuthForm>
 					</FormContainer>

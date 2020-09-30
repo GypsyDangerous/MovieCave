@@ -13,9 +13,11 @@
 		"color": "^3.1.2",
 		"fetchio-js": "^1.1.1",
 		"next": "9.5.3",
+		"nprogress": "^0.2.0",
 		"react": "16.13.1",
 		"react-dom": "16.13.1",
 		"react-hamburger-button": "0.0.1",
+		"react-responsive": "^8.1.0",
 		"styled-components": "^5.2.0"
 	},
 	"devDependencies": {
