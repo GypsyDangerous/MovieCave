@@ -125,7 +125,8 @@ const GlobalStyle = createGlobalStyle`
     	padding: 0;
         margin: 0;
 		font-family: ${props => props.theme.fonts.join(", ")};
-		overflow: hidden;
+        overflow: hidden;
+        box-sizing: border-box !important;
     }
 
     a {
