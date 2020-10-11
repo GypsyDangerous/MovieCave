@@ -9,7 +9,8 @@ import LinkList from "../components/Styled components/LinkList";
 import NavLink from "../components/shared/NavLink";
 import styled from "styled-components";
 import { AppContext, AppContextProvider } from "../contexts/AppContext";
-import Content from "../components/Styled components/Content"
+import Content from "../components/Styled components/Content";
+import firebase from "./firebase";
 
 import Router from "next/router";
 import NProgress from "nprogress"; //nprogress module
@@ -117,7 +118,7 @@ const Divider = styled.hr`
 `;
 
 import { createGlobalStyle } from "styled-components";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
     html,
@@ -162,42 +163,55 @@ const GlobalStyle = createGlobalStyle`
 
 function App({ children, HideSidebar, Component, pageProps, ...props }) {
 	const { sidebarOpen } = useContext(AppContext);
+	const [firebaseInit, setFirebaseInit] = useState(false);
+
+	useEffect(() => {
+		(async () => {
+			const result = await firebase.isInitialized();
+			setFirebaseInit(result);
+		})();
+	}, []);
+
 	return (
 		<Theme>
 			<GlobalStyle />
-			<Header HideSidebar={HideSidebar}/>
-			<Body>
-				{!HideSidebar && (
-					<Sidebar open={sidebarOpen}>
-						<SidebarContent>
-							<LinkList>
-								<NavLink href="/" activeClassName="active-link">
-									<a>My Feed</a>
-								</NavLink>
-								<NavLink href="/popular" activeClassName="active-link">
-									<a>Popular</a>
-								</NavLink>
-								<NavLink href="/now-playing" activeClassName="active-link">
-									<a>Now Playing</a>
-								</NavLink>
-								<NavLink href="/upcoming" activeClassName="active-link">
-									<a>Up Coming</a>
-								</NavLink>
-								<NavLink href="/top-rated" activeClassName="active-link">
-									<a>Top Rated</a>
-								</NavLink>
-							</LinkList>
-						</SidebarContent>
-						<Divider />
-						<SidebarContent>
-							<h3>Latest Activity</h3>
-						</SidebarContent>
-					</Sidebar>
-				)}
-				<Content sidebarOpen={sidebarOpen && !HideSidebar}>
-					<Component {...pageProps} />
-				</Content>
-			</Body>
+			{firebaseInit !== false && (
+				<>
+					<Header HideSidebar={HideSidebar} />
+					<Body>
+						{!HideSidebar && (
+							<Sidebar open={sidebarOpen}>
+								<SidebarContent>
+									<LinkList>
+										<NavLink href="/" activeClassName="active-link">
+											<a>My Feed</a>
+										</NavLink>
+										<NavLink href="/popular" activeClassName="active-link">
+											<a>Popular</a>
+										</NavLink>
+										<NavLink href="/now-playing" activeClassName="active-link">
+											<a>Now Playing</a>
+										</NavLink>
+										<NavLink href="/upcoming" activeClassName="active-link">
+											<a>Up Coming</a>
+										</NavLink>
+										<NavLink href="/top-rated" activeClassName="active-link">
+											<a>Top Rated</a>
+										</NavLink>
+									</LinkList>
+								</SidebarContent>
+								<Divider />
+								<SidebarContent>
+									<h3>Latest Activity</h3>
+								</SidebarContent>
+							</Sidebar>
+						)}
+						<Content sidebarOpen={sidebarOpen && !HideSidebar}>
+							<Component {...pageProps} />
+						</Content>
+					</Body>
+				</>
+			)}
 			{/* <Footer /> */}
 		</Theme>
 	);

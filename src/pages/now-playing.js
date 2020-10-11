@@ -4,8 +4,8 @@ import MovieSection from "../components/Styled components/MovieSection";
 const Home = ({ movies }) => {
 	return (
 		<div>
-			<MovieSection id="my-feed">
-                <h1>My Feed</h1>
+			<MovieSection id="now-playing">
+                <h1>Now Playing</h1>
 				<div>
 					{movies.map(movie => (
 						<MovieItem {...movie} />
@@ -17,7 +17,7 @@ const Home = ({ movies }) => {
 };
 
 Home.getInitialProps = async ({ req, query }) => {
-	const response = await fetch("http://localhost:3000/api/movies/popular");
+	const response = await fetch("http://localhost:3000/api/movies/now_playing");
 	const data = await response.json();
 	return {
 		movies: data.results,

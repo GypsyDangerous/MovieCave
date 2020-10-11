@@ -4,8 +4,8 @@ import MovieSection from "../components/Styled components/MovieSection";
 const Home = ({ movies }) => {
 	return (
 		<div>
-			<MovieSection id="my-feed">
-                <h1>My Feed</h1>
+			<MovieSection id="popular">
+                <h1>Popular</h1>
 				<div>
 					{movies.map(movie => (
 						<MovieItem {...movie} />
