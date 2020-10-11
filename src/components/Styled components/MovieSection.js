@@ -7,12 +7,15 @@ const MovieSection = styled.section`
         overflow: auto;
         flex-wrap: wrap;
         height: min-content;
+        justify-content: center;
     }
     height: min-content;
     padding: .5rem;
     box-sizing: border-box;
-    margin-left: 2rem;
+    margin-left: 1rem;
     margin-top: 1.5rem;
+    // justify-content: center;
+    // display: flex;
     color: ${props => props.theme.colors.primary.text};
     &::-webkit-scrollbar, & *::-webkit-scrollbar {
 		height: 4px;

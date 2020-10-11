@@ -11,7 +11,7 @@ const useInfiniteScroll = (url, page, setter) => {
 			setLoading(true);
 			setError(false);
 			try {
-				const response = await fetch(`${url}&page=${page}`);
+				const response = await fetch(`${url}?page=${page}`);
                 const json = await response.json();
                 if(!response.ok){
                     throw new Error (`${json.status}: ${json.message}`)
